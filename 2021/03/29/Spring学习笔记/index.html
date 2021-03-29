@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Kevin&#39;s Blog">
+    <meta name="keywords" content="Spring学习笔记, Kevin&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Kevin&#39;s Blog</title>
+    <title>Spring学习笔记 | Kevin&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/icon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/13.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">Spring学习笔记</h1>
                 </div>
             </div>
         </div>
@@ -469,19 +469,112 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h1 id="第一章概述"><a href="#第一章概述" class="headerlink" title="第一章概述"></a>第一章概述</h1><p>框架怎么学：框架是一个软件，其他人写好的软件。<br>1）    知道框架能做什么，mybatis—访问数据库，对表中的数据执行增删改查<br>2）    框架的语法，框架要完成一个功能，需要一定的步骤支持的<br>3）    框架的内部实现，框架的内部怎么做。原理是什么？<br>4）    通过学习，可以实现一个框架。（写框架，实现框架）</p>
+<h1 id="第二章控制反转IOC"><a href="#第二章控制反转IOC" class="headerlink" title="第二章控制反转IOC"></a>第二章控制反转IOC</h1><p>Spring的第一个核心思想。IOC（控制反转），是一个理论，概念，思想。描述：把对象的创建，赋值，管理工作都交给代码之外的容器实现。也就是对象的创建是有其它外部资源完成。<br>控制：创建对象，对象的属性赋值，对象之间的关系管理。<br>反转：把原来的开发人员管理，创建对象的权限转移给代码之外的容器实现。由容器代替工作人员管理对象，创建对象，给属性赋值<br>正转：由开发人员在代码中，使用new构造方法创建对象，开发人员主动管理对象。<br>为什么要使用ioc：目的就是减少对代码的改动，也能实现不同的功能。实现解耦合。<br>Java中创建对象有哪些方式：<br>1.构造方法，new Student（）<br>2.反射<br>3.序列化<br>4.克隆<br>5.Ioc：容器创建对象<br>6.动态代理</p>
+<p>IOC的体现：<br>    Servlet 1：创建类继承HttpServelt<br>           2：在web.xml中注册servlet，使用<servlet-name>myservlet</servlet-name><br><servlet-class>com.bjpwernode.controller.MyServlet</servlet-class><br>           3：没有创建servlet对象，没有MyServlet myservlet=new MyServlet()<br>           4：Servlet是Tomcat服务器它不是你创建的。Tomcat也称为容器。<br>            Tomcat作为容器：里面存放servlet对象，Listener，Filter对象<br>IOC的技术实现，<br>    DI是ioc的技术实现，DI（Dependency Injection）是依赖注入，只需要在程序中提供要使用的对象名称就可以，至于对象如何在容器中创建，赋值，查找都由容器内部实现。<br>Spring是使用的di实现了ioc的功能，spring底层创建对象，使用的反射机制。<br>Spring是一个容器，管理对象，给属性赋值，底层是反射创建对象。</p>
+<p>Junit：单元测试，一个工具类库，做测试方法使用的。<br>    单元：指定的是方法，一个类中有很多方法，一个方法称为一个单元。</p>
+<ol>
+<li>需要加入junit依赖。<dependency>
+<!--      单元测试-->
+   <groupId>junit</groupId>
+   <artifactId>junit</artifactId>
+   <version>4.11</version>
+   <scope>test</scope></li>
+<li>   创建测试作用的类：叫做测试类。<br>src/test/java目录中创建类</li>
+<li>   创建测试方法<br>1）    public方法<br>2）    没有返回值void<br>3）    方法名称自定义，建议名称是test+你要测试的方法名称</li>
+</ol>
+<p> <br>4）    方法没有参数<br>5）    方法上面加入@Test，这样的方法是可以单独执行，不需要使用main方法。<br>什么样的对象放入容器中：dao类，service类，controller类，工具类<br>                        Spring中的对象默认都是单例，在容器中叫此名称对象仅一个</p>
+<ol>
+<li>   使用xml配置文件，使用bean标签</li>
+<li>注解<br>不放到spring容器中的对象：实体类对象，实体类数据来自于数据库的。<pre><code>                     Servlet，listener，filter等。
+</code></pre>
+核心技术：IOC（控制反转）：1.理论，思想，概念：知道开发人员在容器中，代码之外管理对象，给属性赋值，管理依赖。<pre><code>                     2.IOC技术实现的DI（依赖注入）：开发人员在项目中只需要提供对象的名称，对象的创建查找赋值都由容器自己实现
+                     3.spring使用的DI的技术，底层使用的是反射机制
+                     4.DI给属性赋值：1set注入，2property方法赋值；引用类型注入属性名和ref的bean的id
+                                     2构造注入：constructor-arg的index和name进行对应构造方法的赋值
+</code></pre>
+</li>
+</ol>
+<p>使用spring框架的步骤：加入依赖，创建类：接口、实现类、没有接口的类，创建spring的配置文件xml，使用<bean>声明对象，在使用容器中的对象，通过ApplicationContext接口和他的实现类ClassPathXmlApplcationContext的方法getBean（）就可以拿到容器。</p>
+<p>1、    多个配置优势<br>a)    每个文件的大小比一个文件要小很多。效率高<br>b)    避免多人竞争带来的冲突<br>如果你的项目有多个模块（相关的功能在一起），一个模块一个配置文件。<br>    多文件的分配方式<br>a)    按功能模块，一个模块一个配置文件。<br>b)    按类的功能，数据库相关的配置一个文件配置文件，做事务的功能一个配置文件，做service功能的一个配置文件等</p>
+<p>2、    基于注解的di：通过注解完成java对象创建，属性赋值。<br>使用注解的步骤：<br>    1、加入maven的依赖spring-context，在你加入spring-context的同时，<br>，间接加入spring-aop的依赖。使用注解必须使用aop的依赖。<br>    2、在类中加入spring 的注解（多个不同功能的注解）<br>    3、在spring的配置文件中，加入一个组件扫描器的标签，说明注解在你的项目中的位置<br>学习的注解：<br>    1、@Component，创建对象<br>    2、@Respotory，创建dao对象，用来访问数据库的。<br>    3、@Service，创建Service对象，处理业务逻辑的，可以有事务功能。<br>    4、@Controller，创建控制器对象，接受请求，显示处理结果。<br>    5、@Value，简单类型的属性赋值<br>    6、@Autowired，spring框架中引用类型的赋值注解，支持byName，byTyp默认是byType<br>    7、@Resource，jdk中的注解，使用自动注入给引用赋值，支持byName，byType，默认是byName<br>    8、注解的使用步骤：<br>        1、加入依赖：spring-context，简介加入spring-aop<br>        2、在类中加入注解<br>        3、在spring的配置文件中，加入组件扫描器的标签&lt;context:component-scan base-package=’包名’&gt;</p>
+<p>Ioc能实现业务之间的解耦合，例如service和dao对象之间的解耦合。</p>
+<h1 id="第三章AOP切面编程"><a href="#第三章AOP切面编程" class="headerlink" title="第三章AOP切面编程"></a>第三章AOP切面编程</h1><p>1．动态代理<br>    实现方式：JDK动态代理，使用JDK中的Proxy，Method，InvocationHanderl创建代理对象。JDK动态代理要求目标类必须实现接口<br>    Cglib动态代理：第三方的工具库，创建代理对象，原理是继承。通过继承目标类，创建子类，子类就是代理对象。要求目标类不能是final的，方法也不能是final<br>3.    动态代理的作用：<br>在目标类源代码不改变的情况下增加功能<br>减少代码的重复<br>专注业务逻辑代码<br>解耦合，让你的业务功能和日志，事务非业务功能分离<br>4.    AOP：面向切面编程，基于动态代理的，可以使用jdk，cglib两种代理方式。Aop就是动态代理的规范化，把动态代理的实现步骤，方式都定义好了，让开发人员用一种统一的方式，就用动态代理。<br>5.    AOP(Aspect Orient Programming)：面向切面编程<br>Aspect：切面，给你的目标类增加的功能，就是切面。上面的日志、事务<br>切面的特点：一般是非业务方法，独立使用<br>Orient：面向<br>Programming：编程<br>    怎么理解面向切面编程？<br>        1）需要在分析项目功能时，找出切面。<br>        2）合理的安排切面的执行时间（目标方法前，还是目标方法后）<br>        3）合理的安全切面执行位置，在哪个类具体增强什么功能。<br>    术语：<br>        1）Aspect：切面，表示增强的功能，代码，完成某个功能，非业务功能，常见的切面功能有日志，事务，统计信息，参数检查，权限验证。<br>        2）JoinPoint：连接点，连接业务和切面的位置。某类的业务方法<br>        3）Pointout：切入点，指多个连接点方法的集合。多个方法<br>        4）目标对象：给哪个类的方法增加功能，这个类就是目标对象<br>        5）Advice：通知，通知表示切面功能执行的时间。<br>说一个切面有三个关键的要素：<br>        1）切面的功能代码，切面干什么<br>        2）切面的执行位置，使用Pointcut表示切面执行的位置<br>        3）切面的执行时间，使用Advice表示时间，在目标方法之前还是目标方法之后<br>5、Aop的实现<br>    Aop是一个规范，是对动态代理的一个规范化，一个标准。<br>    Aop的技术实现框架：<br>        1、spring：spring内部实现了aop规范，能做aop的工作<br>                   Spring主要在事务处理使用aop<br>                   项目开发中很少使用spring 的aop实现，因为spring的aop比较笨重。<br>        2、aspectJ：一个开源的专门做aop的框架。Spring框架中集成了aspectJ框架，通过spring就能使用aspectJ的功能。<br>                    aspectJ框架实现aop的两种方式：</p>
+<ol>
+<li>   使用xml文件配置：配置全局事务</li>
+<li>   使用注解，我们在项目中要做aop的功能，一般都用注解，aspectJ有5个注解。</li>
+<li>学习aspectJ框架的使用<br>  1）切面的执行时间，这个执行时间在规范中他叫做Advice（通知，增强），在aspectJ框架中使用注解表示的。也可以使用xml配置文件中的标签<pre><code>  1）@Before
+  2）@AfterReturning
+  3）@Around
+  4）@AfterThrowing
+  5）@After
+</code></pre>
+  2）表示切面执行的位置，使用的是切入点表达式。</li>
+</ol>
+<h1 id="第四章Spring集成Mybatis"><a href="#第四章Spring集成Mybatis" class="headerlink" title="第四章Spring集成Mybatis"></a>第四章Spring集成Mybatis</h1><p>用的技术：ioc。<br>为什么ioc：能把Mybatis和spring集成到一起，像一个框架，是因为ioc能创建对象。<br>可以吧Mybatis框架中的对象交给spring统一创建，开发人员从spring中获取对象。<br>开发人员就不用同时面对两个或多个框架，就面对一个spring框架</p>
+<p>Mybatis使用步骤：对象</p>
+<ol>
+<li>   定义dao接口，studentDao</li>
+<li>   定义mapper文件 studentDao.xml</li>
+<li>   定义mabatis的主配置文件 mybatis.xml文件</li>
+<li>   创建dao 的代理对象，StudentDao dao=SqlSession.getMapper(StudentDao.class);<br>List<Student> students=dao.selectStudents();</li>
+</ol>
+<p>要使用dao对象，需要使用getMapper()方法，<br>怎么能使用getMapper()方法，需要哪些条件</p>
+<ol>
+<li>   获取SqlSession对象，需要使用SqlSessionFactory的openSession()方法。</li>
+<li>   创建SqlSessionFactor对象。通过读取mybatis 的主配置文件，能创建SqlSessionFactory对象<br>需要SqlSessionFactory对象，使用Factory能获取SqlSession，有了SqlSession就能有dao，目的就是获取dao对象。Factory创建需要读取主配置文件。<br>主配置文件：</li>
+<li>数据库信息</li>
+<li>   Mapper文件的位置</li>
+</ol>
+<p>通过以上的说明，我们需要让spring创建以下对象<br>1.独立的连接池类的对象，使用阿里的druid连接池<br>2.SqlSessionFactory对象<br>3.创建出dao对象<br>需要学习就是上面三个对象的创建语法，使用xml的bean标签。</p>
+<p>复习Aop：<br>    1.@Before：前置通知，在目标方法之前先执行切面的功能<br>    2.@AfterReturning后置通知，在目标方法之后执行的，能够获取到目标方法的返回值<br>    3.@Around环绕通知，在目标方法前和后都能增强功能，控制目标方法的访问，修改返回值<br>    4.@AterThrowing异常通知，在目标方法抛出异常后执行的通知<br>    5.@After最终通知，总是会被执行的代码<br>    6.@Pointcut定义和管理切入点的辅助注解<br>    7.代理的使用方法（1.如果目标有接口，框架使用jdk 的动态代理。如果目标类没有接口使用的是cglib动态代理。3.有接口也可以强制使用cglib动态代理。）</p>
+<p>复习整合mybatis：<br>    使用spring的ioc核心技术，把mybatis框架中使用的对象交给spring统一创建和管理。（Spring是容器，存放项目中要使用的各种对象，例如Service对象，Dao对象，工具类对象等等。）<br>    1.交给spring的mybatis对象：1.数据源DataSource，使用阿里公司的Druid连接池<br>    2.SqlSessionFactory独享，使用的SqlSessionFactoryBean在内部创建的SqlSessionFactory<br>    3.Dao代理对象，使用的MapperScanConfigure，在这个类的内部，调用getMapper()，创建接口的Dao对象。</p>
+<h1 id="第五章-Spring的事务处理"><a href="#第五章-Spring的事务处理" class="headerlink" title="第五章 Spring的事务处理"></a>第五章 Spring的事务处理</h1><ol>
+<li>   什么是事务<br>讲mysql的时候，提出了事务，事务是指一组sql语句的集合，集合中有多条sql语句可能是insert，update，select，delete，我们希望这些多个sql语句都能成功，或者都失败，这些sql语句的执行是一直的，作为一个整体执行。</li>
+<li>   在什么时候想到使用事务<br>当我的操作，涉及到多个表，或者是多个sql语句的insert，update，delete。需要保证这些语句都是成功才能完成我的功能，或者都失败，保证操作是符合要求的。<br>在java代码中写程序，控制事务，此时事务应该放在哪里呢？事务应该放在service类的业务方法上，因为业务方法会调用多个dao方法，执行多个sql语句</li>
+<li>   通常使用JDBC访问数据库，还是mybatis访问数据库怎么处理事务<br>Jdbc访问数据库，处理事务 Connection conn；conn.commit()；conn.rollback();<br>Mybatis访问数据库，处理事务，SqlSession.commit()；SqlSession.rollback();<br>Hibernate访问数据库，处理事务，Session.commit()；Session.rollback()；</li>
+<li>3问题中事务的处理方式，有什么不足<br>1）不同的数据库访问技术，处理事务的对象，方法不同，需要了解不同数据库访问技术使用事务的原理。<br>2）掌握多种数据库中事务的处理逻辑。什么时候提交事务，什么时候回滚事务。<br>3）处理事务的多种方法。<pre><code> 总结：就是多种数据库的访问技术，有不同的事务处理的机制，对象，方法
+</code></pre>
+</li>
+<li>   怎么解决不足<br>Spring提供一种处理事务的统一模型，能使用统一步骤，方式完成多种不同数据库访问技术的事务处理。<br>使用spring的事务处理机制，可以完成JDBC访问数据库的事务处理<br>使用spring的事务处理机制，可以完成mybatis访问数据的事务处理<br>使用spring的事务处理机制，可以完成hibernate访问数据库的事务处理</li>
+<li>处理事务，需要怎么做，做什么<br>Spring处理事务的模型，使用的步骤都是固定的。把事务使用的信息提供给spring就可以了。<br>1）事务内部提交，回滚事务，使用的事务管理器对象，代替你完成commit，rollback。事务管理器是一个接口和他的众多实现类。<pre><code> 接口：PlatformTransactionManager，定义了事务重要方法commit，rollback
+ 实现类：spring把每一种数据库访问技术对应的事务处理类都创建好了。
+ Mybatis访问数据库—spring创建好的DataSourceTransactionManager
+ Hibernate访问数据库—spring创建DataSourceTransactionManager
+</code></pre>
+怎么使用：你需要告诉spring你用的哪种数据库访问技术，怎么告诉spring呢？声明数据库访问技术对于的事务管理器实现类，在spring的配置文件使用<bean>声明就可以了。例如：你要使用mybatis访问数据库，你应该在xml配置文件中<bean id=”XXX” class=”…DataSourceTransactionManager”>
+2）你的业务方法需要什么样的事务，说明需要事务的类型。
+ 说明方法需要的事务： 
+2）事务的超时时间：表示一个方法最长的执行时间，如果方法执行时超过了，事务就会回滚。单位是秒，整数值，默认是-1。
+3）事务的传播行为：控制业务方法是不是有事务的，是什么样的事务的。7个传播行为，表示你的业务方法调用时，业务在方法之间是如果使用的。
+PROPAGATION_REQUIRED 
+PROPAGATION_REQUIRES_NEW 
+PROPAGATION_SUPPORTS 
+3）事务提交事务，回滚事务的时机
+ 1）当你的业务方法，执行成功，没有异常抛出，当方法执行完毕，spring的方法执行后提交事务。事务管理器commit
+ 2）当你的业务方法抛出运行异常，spring执行回滚，调用事务管理器的rollback运行时异常的定义：RuntimeException和他的子类都是运行时异常，例如NullPointException，NumberFormatException
+ 3）当你的业务方法抛出非运行时异常，主要是受异常时，提交事务
+     受查异常：在你写代码中，必须处理的异常。例如IOExcetion，SQLException
+总结soring的事务</li>
+<li>   管理事务的是事务管理和他的实现类</li>
+<li>   Spring的事务是一个统一的模型<br>1）指定要使用的事务管理器实现类，使用<bean><br>2）指定哪些类，哪些方法需要加入事务的功能<br>3）指定方法需要的隔离级别，传播行为，超时时间<br>你需要告诉spring，你的项目类的信息，方法的名称，方法的事务传播行为。<br>Spring框架中提供的事务处理方案</li>
+<li>适合中小项目使用的，注解方案。<br>spring框架自己用aop实现给业务方法增加事务的功能，使用@Transactional注解增加事务。Transactional注解是spring框架自己注解，放在public方法的上面，表示当前方法具有事务。可以给注解的属性赋值，表示具体的隔离级别，传播行为，异常信息等等。<br> 使用@Transactional的步骤</li>
+<li>   需要声明事务管理器对象<bean id=”XX” class=”DataSourceTransactionMannager”></li>
+<li>开启事务注解驱动，告诉spring框架，我要使用注解的方式管理事务。<br>Spring使用aop机制，创建@Transactional所在的类代理对象，给方法加入事务的功能。Spring给业务加入事务：<pre><code> 在你的业务执行之前，先开启事务，在业务方法之后提交或回滚事务，使用aop的环绕通知
+  
+ 3.在你的方法上面加入@Trancational注解
+</code></pre>
+</li>
+</ol>
+<p>2.适合大型项目，有很多的类，方法，需要大量的配置事务，使用aspectj框架功能，在spring配置文件中声明类，方法需要的事务。这种方式业务方法和事务配置完全分离。<br>    实现步骤：都是在xml配置文件中实现。<br>        1）要使用的是aspectj框架，需要加依赖</p>
+<pre><code>    2）声明事务管理器对象
+        &lt;bean id=”XXX” class=”DataSourceTransactionManager”&gt;
+    3）声明方法需要的事务类型（配置方法的事务属性【隔离级别，传播行为，超时】）
+    4）配置aop：指定哪些类要创建代理。
+</code></pre>
+<h1 id="第六章Web项目使用ApplicationContext"><a href="#第六章Web项目使用ApplicationContext" class="headerlink" title="第六章Web项目使用ApplicationContext"></a>第六章Web项目使用ApplicationContext</h1><p>1.之前做的是javase项目有main方法的，执行代码是执行main方法，<br>    在main里面创建的容器对象<br>    ApplicationContext ctx=new ClassPathXmlApplicationContext(“applicationContext.xml”);<br>2.web项目是在tomcat服务器上创建的，tomcat一启动，项目一直运行。</p>
+<p>需求：<br>Web项目中容器对象只需要创建一次，把容器对象放到全局作用域ServletContext中。<br>怎么实现：<br>    使用监听器    当全局作用域对象被创建时    创建容器    存入ServletContext<br>    监听器的作用：<br>    1）创建容器对象，执行ApplicationContext ctx=new ClassPathApplicationContext(“applicationContext.xml”)<br>    2）把容器对象放入ServletContext，    ServletContext.setAttribute(key,ctx)<br>监听器可以自己创建，也可以使用框架中创建好的ContextLoaderListener（知道用法）</p>
+<p>private wabApplicationcontext context;<br>public interface webApplicationcontext extends ApplicationContext<br>ApplicationContext：javase项目中使用的容器对象<br>webApplicationcontext：web项目中使用的容器对象<br>把创建的容器对象，放入到全局作用域</p>
 
                 
             </div>
@@ -508,7 +601,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/29/hello-world/">http://example.com/2021/03/29/hello-world/</a>
+                    <a href="http://example.com/2021/03/29/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2021/03/29/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -719,13 +812,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/29/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">
+                <a href="/2021/03/29/SSM%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E8%BF%87%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="我的博客文章">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="SSM框架整合过程">
                         
-                        <span class="card-title">我的博客文章</span>
+                        <span class="card-title">SSM框架整合过程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -753,16 +846,16 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/29/hello-world/">
+                <a href="/2021/03/29/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
+                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="Redis学习笔记">
                         
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">Redis学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -783,7 +876,6 @@
                         </span>
                     </div>
                 </div>
-
                 
             </div>
         </div>

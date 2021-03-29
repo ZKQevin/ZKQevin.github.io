@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Hello World, Kevin&#39;s Blog">
+    <meta name="keywords" content="SSM框架整合过程, Kevin&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Hello World | Kevin&#39;s Blog</title>
+    <title>SSM框架整合过程 | Kevin&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/icon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -310,12 +310,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/12.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Hello World</h1>
+                    <h1 class="description center-align post-title">SSM框架整合过程</h1>
                 </div>
             </div>
         </div>
@@ -469,19 +469,14 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h1 id="创建Maven的Web项目"><a href="#创建Maven的Web项目" class="headerlink" title="创建Maven的Web项目"></a>创建Maven的Web项目</h1><p>创建Maven项目，点击Create from archetype，勾选org.apache.maven.archetypes:maven-archetype-webapp，写上项目名称以及Groupld，选择Maven库以及Maven Home，点击完成。<br>创建Java、Resource目录，项目结构如下：<br><img src="https://img-blog.csdnimg.cn/20210124221653919.png" alt="在这里插入图片描述"><br>创建bean实体包、Controller控制层包、dao持久化数据库操作包、Service服务包以及其目录下的ServiceImpl服务接口实现包。<img src="https://img-blog.csdnimg.cn/20210124221823903.png" alt="在这里插入图片描述"></p>
+<h1 id="创建配置文件"><a href="#创建配置文件" class="headerlink" title="创建配置文件"></a>创建配置文件</h1><h6 id="创建jdbc-properties数据库连接文件"><a href="#创建jdbc-properties数据库连接文件" class="headerlink" title="创建jdbc.properties数据库连接文件"></a>创建jdbc.properties数据库连接文件</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">jdbc.url=jdbc:mysql:<span class="comment">//localhost:3306/数据库名称?useUnicode=true&amp;characterEncoding=UTF-8</span></span><br><span class="line">jdbc.username=用户名</span><br><span class="line">jdbc.passwd=密码</span><br></pre></td></tr></table></figure>
+<h6 id="创建Mybatis-xml配置文件"><a href="#创建Mybatis-xml配置文件" class="headerlink" title="创建Mybatis.xml配置文件"></a>创建Mybatis.xml配置文件</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span> ?&gt;</span><br><span class="line">&lt;!DOCTYPE configuration</span><br><span class="line">        PUBLIC <span class="string">&quot;-//mybatis.org//DTD Config 3.0//EN&quot;</span></span><br><span class="line">        <span class="string">&quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;</span>&gt;</span><br><span class="line">&lt;configuration&gt;</span><br><span class="line">    &lt;!--settings：控制mybatis全局行为--&gt;</span><br><span class="line">    &lt;settings&gt;</span><br><span class="line">        &lt;!--设置mybatis输出日志--&gt;</span><br><span class="line">        &lt;setting name=<span class="string">&quot;logImpl&quot;</span> value=<span class="string">&quot;STDOUT_LOGGING&quot;</span>/&gt;</span><br><span class="line">    &lt;/settings&gt;</span><br><span class="line">    &lt;!--设置别名--&gt;</span><br><span class="line">    &lt;typeAliases&gt;</span><br><span class="line">        &lt;package name=<span class="string">&quot;实体类所在的包名&quot;</span>/&gt;</span><br><span class="line">    &lt;/typeAliases&gt;</span><br><span class="line">    &lt;!-- sql mapper(sql映射文件)的位置--&gt;</span><br><span class="line">    &lt;mappers&gt;</span><br><span class="line">        &lt;package name=<span class="string">&quot;mapper文件所在的包名在src/java/dao路径下&quot;</span>/&gt;</span><br><span class="line">    &lt;/mappers&gt;</span><br><span class="line">&lt;/configuration&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="创建Spring的ApplicationContext-xml配置文件"><a href="#创建Spring的ApplicationContext-xml配置文件" class="headerlink" title="创建Spring的ApplicationContext.xml配置文件"></a>创建Spring的ApplicationContext.xml配置文件</h6><p>其中需要声明数据源、声明SqlSessionFactory、扫描dao对象、服务层包的bean对象</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">&lt;beans xmlns=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="line">       xmlns:xsi=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line">       xmlns:context=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="line">       xmlns:mvc=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span><br><span class="line">       xsi:schemaLocation=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="line"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span><br><span class="line"><span class="string">       http://www.springframework.org/schema/context</span></span><br><span class="line"><span class="string">       https://www.springframework.org/schema/context/spring-context.xsd</span></span><br><span class="line"><span class="string">       http://www.springframework.org/schema/mvc</span></span><br><span class="line"><span class="string">       https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--spring配置文件：声明service，dao，工具类对象。--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--去声明数据源，连接数据库--&gt;</span><br><span class="line">    &lt;context:property-placeholder location=<span class="string">&quot;classpath:jdbc.&#x27;properties存放的位置&#x27;&quot;</span>/&gt;</span><br><span class="line">    &lt;bean id=<span class="string">&quot;dataSource&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;com.alibaba.druid.pool.DruidDataSource&quot;</span></span><br><span class="line">          init-method=<span class="string">&quot;init&quot;</span> destroy-method=<span class="string">&quot;close&quot;</span>&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;url&quot;</span> value=<span class="string">&quot;$&#123;jdbc.url&#125;&quot;</span>/&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;username&quot;</span> value=<span class="string">&quot;$&#123;jdbc.username&#125;&quot;</span>/&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;password&quot;</span> value=<span class="string">&quot;$&#123;jdbc.passwd&#125;&quot;</span>/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--声明sqlSessionFactoryBean创建SqlSessionFactory--&gt;</span><br><span class="line">    &lt;bean id=<span class="string">&quot;sqlSessionFactory&quot;</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;</span>&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;dataSource&quot;</span> ref=<span class="string">&quot;dataSource&quot;</span>/&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;configLocation&quot;</span> value=<span class="string">&quot;classpath:&#x27;mybatis.xml存放的位置&#x27;&quot;</span>/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--声明mybatis扫描器创建dao对象--&gt;</span><br><span class="line">    &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;</span>&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;sqlSessionFactoryBeanName&quot;</span> value=<span class="string">&quot;sqlSessionFactory&quot;</span>/&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;basePackage&quot;</span> value=<span class="string">&quot;dao存放的引用路径&quot;</span>/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line">    </span><br><span class="line">    &lt;!--声明service的注解@Service所在的包名位置--&gt;</span><br><span class="line">    &lt;context:component-scan base-package=<span class="string">&quot;service存放的引用路径&quot;</span>/&gt;</span><br><span class="line">    &lt;!--事务配置：注解的配置，aspectj的配置都在后面配置--&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h6 id="创建SpringMVC的DispatcherServlet-xml配置文件"><a href="#创建SpringMVC的DispatcherServlet-xml配置文件" class="headerlink" title="创建SpringMVC的DispatcherServlet.xml配置文件"></a>创建SpringMVC的DispatcherServlet.xml配置文件</h6><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">&lt;beans xmlns=<span class="string">&quot;http://www.springframework.org/schema/beans&quot;</span></span><br><span class="line">       xmlns:xsi=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line">       xmlns:context=<span class="string">&quot;http://www.springframework.org/schema/context&quot;</span></span><br><span class="line">       xmlns:mvc=<span class="string">&quot;http://www.springframework.org/schema/mvc&quot;</span></span><br><span class="line">       xsi:schemaLocation=<span class="string">&quot;http://www.springframework.org/schema/beans</span></span><br><span class="line"><span class="string">       http://www.springframework.org/schema/beans/spring-beans.xsd</span></span><br><span class="line"><span class="string">       http://www.springframework.org/schema/context</span></span><br><span class="line"><span class="string">       https://www.springframework.org/schema/context/spring-context.xsd</span></span><br><span class="line"><span class="string">       http://www.springframework.org/schema/mvc</span></span><br><span class="line"><span class="string">       https://www.springframework.org/schema/mvc/spring-mvc.xsd&quot;</span>&gt;</span><br><span class="line">    &lt;!--springmvc配置文件，声明Controller和其它web相关的对象--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--声明组件扫描器--&gt;</span><br><span class="line">    &lt;context:component-scan base-package=<span class="string">&quot;controller所在的包名&quot;</span>/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--声明springmvc框架中的视图解析器，帮助开发人员设置视图文件的路径--&gt;</span><br><span class="line">    &lt;bean <span class="class"><span class="keyword">class</span></span>=<span class="string">&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;</span>&gt;</span><br><span class="line">        &lt;!--前缀：视图文件的路径--&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;prefix&quot;</span> value=<span class="string">&quot;/WEB-INF/jsp/&quot;</span>/&gt;</span><br><span class="line">        &lt;!--后缀：表示视图文件的扩展名，使用的<span class="built_in">Set</span>注入方式，赋值所以是用的value进行赋值--&gt;</span><br><span class="line">        &lt;property name=<span class="string">&quot;suffix&quot;</span> value=<span class="string">&quot;.jsp&quot;</span>/&gt;</span><br><span class="line">    &lt;/bean&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--声明注解驱动，做ajax和静态资源都需要用到注解驱动--&gt;</span><br><span class="line">    &lt;mvc:annotation-driven /&gt;</span><br><span class="line">&lt;/beans&gt;</span><br></pre></td></tr></table></figure>
+<h1 id="修改web-xml配置文件"><a href="#修改web-xml配置文件" class="headerlink" title="修改web.xml配置文件"></a>修改web.xml配置文件</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;UTF-8&quot;</span>?&gt;</span><br><span class="line">&lt;web-app xmlns=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee&quot;</span></span><br><span class="line">         xmlns:xsi=<span class="string">&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span></span><br><span class="line">         xsi:schemaLocation=<span class="string">&quot;http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd&quot;</span></span><br><span class="line">         version=<span class="string">&quot;4.0&quot;</span>&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--中央调度器DispatcherServlet--&gt;</span><br><span class="line">    &lt;servlet&gt;</span><br><span class="line">        &lt;servlet-name&gt;web&lt;/servlet-name&gt;</span><br><span class="line">        &lt;servlet-<span class="class"><span class="keyword">class</span>&gt;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">web</span>.<span class="title">servlet</span>.<span class="title">DispatcherServlet</span>&lt;/<span class="title">servlet</span>-<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">name</span>&gt;<span class="title">contextConfigLocation</span>&lt;/<span class="title">param</span>-<span class="title">name</span>&gt;</span></span><br><span class="line">            &lt;param-value&gt;classpath:conf/DispatcherServlet.xml&lt;/param-value&gt;</span><br><span class="line">        &lt;/init-param&gt;</span><br><span class="line">        &lt;load-on-startup&gt;<span class="number">1</span>&lt;/load-on-startup&gt;</span><br><span class="line">    &lt;/servlet&gt;</span><br><span class="line">    &lt;servlet-mapping&gt;</span><br><span class="line">        &lt;servlet-name&gt;web&lt;/servlet-name&gt;</span><br><span class="line">        &lt;!--将所有以.do结尾的处理都交给中央处理器解决--&gt;</span><br><span class="line">        &lt;url-pattern&gt;*.do&lt;/url-pattern&gt;</span><br><span class="line">    &lt;/servlet-mapping&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--注册spring的监听器--&gt;</span><br><span class="line">    &lt;context-param&gt;</span><br><span class="line">        &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;</span><br><span class="line">        &lt;param-value&gt;classpath:conf/applicationContext.xml&lt;/param-value&gt;</span><br><span class="line">    &lt;/context-param&gt;</span><br><span class="line">    &lt;listener&gt;</span><br><span class="line">        &lt;listener-<span class="class"><span class="keyword">class</span>&gt;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">web</span>.<span class="title">context</span>.<span class="title">ContextLoaderListener</span>&lt;/<span class="title">listener</span>-<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;/<span class="title">listener</span>&gt;</span></span><br><span class="line"><span class="class"></span></span><br><span class="line"><span class="class">    &lt;!--注册字符集过滤器，解决<span class="title">POST</span>乱码的问题--&gt;</span></span><br><span class="line"><span class="class">    &lt;<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">filter</span>-<span class="title">name</span>&gt;<span class="title">characterEncodingFilter</span>&lt;/<span class="title">filter</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">filter</span>-<span class="title">class</span>&gt;<span class="title">org</span>.<span class="title">springframework</span>.<span class="title">web</span>.<span class="title">filter</span>.<span class="title">CharacterEncodingFilter</span>&lt;/<span class="title">filter</span>-<span class="title">class</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;!--设置项目中使用的字符编码--&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">name</span>&gt;<span class="title">encoding</span>&lt;/<span class="title">param</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">value</span>&gt;<span class="title">utf</span>-8&lt;/<span class="title">param</span>-<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;!--强制请求对象（<span class="title">HTTPServletRequest</span>）使用<span class="title">enconding</span>编码的值--&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">name</span>&gt;<span class="title">forceRequestEncoding</span>&lt;/<span class="title">param</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">value</span>&gt;<span class="title">true</span>&lt;/<span class="title">param</span>-<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;!--强制应答对象（<span class="title">HTTPServletResponse</span>）使用<span class="title">enconding</span>编码的值--&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">name</span>&gt;<span class="title">forceResponseEncoding</span>&lt;/<span class="title">param</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">            &lt;<span class="title">param</span>-<span class="title">value</span>&gt;<span class="title">true</span>&lt;/<span class="title">param</span>-<span class="title">value</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;/<span class="title">init</span>-<span class="title">param</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;/<span class="title">filter</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;<span class="title">filter</span>-<span class="title">mapping</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">filter</span>-<span class="title">name</span>&gt;<span class="title">characterEncodingFilter</span>&lt;/<span class="title">filter</span>-<span class="title">name</span>&gt;</span></span><br><span class="line"><span class="class">        &lt;<span class="title">url</span>-<span class="title">pattern</span>&gt;/*&lt;/<span class="title">url</span>-<span class="title">pattern</span>&gt;</span></span><br><span class="line"><span class="class">    &lt;/<span class="title">filter</span>-<span class="title">mapping</span>&gt;</span></span><br><span class="line"><span class="class">&lt;/<span class="title">web</span>-<span class="title">app</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>接下来就可以自己写业务逻辑代码了，或者使用EasyCode插件进行对应的逆向工程生成代码。这就是学习动力节点的B站相关视频总结出来的，感谢大家看到这儿，有问题欢迎指正，谢谢！</p>
 
                 
             </div>
@@ -508,7 +503,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/29/hello-world/">http://example.com/2021/03/29/hello-world/</a>
+                    <a href="http://example.com/2021/03/29/SSM%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E8%BF%87%E7%A8%8B/">http://example.com/2021/03/29/SSM%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E8%BF%87%E7%A8%8B/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -715,54 +710,18 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
-                <a href="/2021/03/29/%E6%88%91%E7%9A%84%E5%8D%9A%E5%AE%A2%E6%96%87%E7%AB%A0/">
+                <a href="/2021/03/29/SSM%E6%A1%86%E6%9E%B6%E6%95%B4%E5%90%88%E8%BF%87%E7%A8%8B/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/20.jpg" class="responsive-img" alt="我的博客文章">
+                        <img src="/medias/featureimages/5.jpg" class="responsive-img" alt="SSM框架整合过程">
                         
-                        <span class="card-title">我的博客文章</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-user fa-fw"></i>
-                            Kevin
-                            
-                        </span>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                本篇&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2021/03/29/hello-world/">
-                    <div class="card-image">
-                        
-                        
-                        <img src="/medias/featureimages/12.jpg" class="responsive-img" alt="Hello World">
-                        
-                        <span class="card-title">Hello World</span>
+                        <span class="card-title">SSM框架整合过程</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -784,6 +743,43 @@
                     </div>
                 </div>
 
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2021/03/29/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Spring学习笔记">
+                        
+                        <span class="card-title">Spring学习笔记</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Kevin
+                            
+                        </span>
+                    </div>
+                </div>
                 
             </div>
         </div>
