@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis学习笔记, Kevin&#39;s Blog">
+    <meta name="keywords" content="Eureka与OpenFeign, Kevin&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis学习笔记 | Kevin&#39;s Blog</title>
+    <title>Eureka与OpenFeign | Kevin&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/icon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -222,12 +222,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/6.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis学习笔记</h1>
+                    <h1 class="description center-align post-title">Eureka与OpenFeign</h1>
                 </div>
             </div>
         </div>
@@ -355,14 +355,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-30
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-30
                 </div>
                 
 
@@ -381,27 +381,39 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>中文官网地址：<a target="_blank" rel="noopener" href="http://www.redis.cn/">http://www.redis.cn</a><br>中文API文档地址：<a target="_blank" rel="noopener" href="http://redisdoc.com/">http://redisdoc.com</a></p>
-<h1 id="一、部署Redis"><a href="#一、部署Redis" class="headerlink" title="一、部署Redis"></a>一、部署Redis</h1><p>1.安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install wget </span><br><span class="line">[root@localhost ~]# wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-6.0.6.tar.gz</span><br><span class="line">[root@localhost ~]# tar xzf redis-6.0.6.tar.gz</span><br><span class="line">[root@localhost ~]# cd redis-redis-6.0.6</span><br><span class="line">[root@localhost ~]# make   #提示报错选装GCC：yum install gcc-c++</span><br></pre></td></tr></table></figure>
-<p>2.开启进程守护</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis-6.0.6]# vi  redis.conf</span><br><span class="line"></span><br><span class="line"># Note that Redis will write a pid file in &#x2F;var&#x2F;run&#x2F;redis.pid when daemonized.</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
-<p>3.开启服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cd &#x2F;usr&#x2F;local&#x2F;bin&#x2F;</span><br><span class="line">[root@localhost bin]# redis-server  &#x2F;redis-6.0.6&#x2F;redis.conf</span><br><span class="line">[root@localhost bin]# redis-cli  -p 6379</span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure>
-<p>4.关闭服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; shutdown</span><br><span class="line">not connected&gt; exit</span><br></pre></td></tr></table></figure>
-<p>5.安装目录文件声明<br>redis-benchmark:性能测试工具，测试性能<br>redis-check-aof：修复有问题的AOF文件，<br>redis-check-dump：修复有问题的dump.rdb文件<br>redis-cli：客户端，操作入口<br>redis-sentinel：redis集群使用<br>redis-server：Redis服务器启动命令</p>
-<p>参考于：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yangliuhbhd/article/details/81317689">https://blog.csdn.net/yangliuhbhd/article/details/81317689</a></p>
-<h1 id="二、Redis常用命令"><a href="#二、Redis常用命令" class="headerlink" title="二、Redis常用命令"></a>二、Redis常用命令</h1><p><strong>Redis五大数据类型String（字符串）、Hash（哈希类似Java的Map）、List（列表）、Set（集合）、Zset（有序集合）</strong></p>
-<p><strong>①String</strong><br>1.添加：set [key] [value]。带生命周期添加：setex [key] [秒数] [value]。带判断存在添加：setnx [key] [value]。<br>2.查询：keys [*]<br>3.删除：DEL [key]。使用FLUSHDB：清除当前数据库，FLUSHALL：清除所有数据库<br>4.移动：MOVE [key] [所移数据库名]<br>5.设置过期时间：EXPIRE [key名] [秒数]，查看过期时间ttl [key名]，如果为-1表示永不过期，-2表示已过期。其它时间为倒数秒数，已经过期的数据就被删除了，不会再keys *中查询到。<br>6.只增加数字不增字符串：INCR/DECR [key名]，增/减一。同理INCRBY/DECRBY [key名] [数字]。<br>7.定点查看字符串：GETRANGE [key名] [前下标] [后下标] ，截取下标添加字符串命令：SETRANGE [key名] [始标] [内容]。<br>8.追加：APPEND [key名] [追加数据]，查询长度：STRLEN [key名]<br>9.批量新增：mset [key] [value] [key] [value]……。批量获取：mget [key] [key] [key]。带判断的新增有序集合（如果数据库已存在都不会成功）：msetnx [key] [value] [key] [value]……。</p>
-<p><strong>②List</strong><br>1.列表LIST相关添加：分为LPUSH和RPUSH，LPUSH [key] [v1] [v2] [v3]……，分为左右进入，如果你是使用左边进的话LPUSH就是逆着出LRANGE，如果你是RPUSH就是顺着出来LRANGE。可以这样理解，当使用LRANGE时是从左到右进行输出，使用LPUSH是从中间往左边插入，使用RPUSH是从中间往右边输入。只有RPUSH是怎么进怎么出。<br>2.创建LIST列表，命令：lpush [key名] [数组]，查看：LRANGE [LISTkey名] 0 -1，查看类型type [key名]。<br>3.列表出栈命令：lpop [key]和rpop [key]，一个是从左边出栈，一个是从右边出栈。<br>4.通过下标获取list中的值，LINDEX [list] [下标值]，是从左到右数的。下标从0开始。获取长度：LLEN [list]。<br>5.删除N个value：LREM [list] [所删除的个数] [所删除的数字]，如果删除的个数大于本身存在的个数，他就会把存在的全部删了，不会报错。<br>6.截取出其中一段赋值给本身：LTRIM [list] [始标] [末标]。<br>7.右出栈左进栈：RPOPLPUSH [list01] [list02] 。就是把后面的list01的右边最后一个添加到list02的左边第一个。<br>8.通过下标更改某一个值：lset [key] [index] [value]。在某个地方前/后插值：LINSERT [key] [before/after] [本身存在value1] [新值value2]。</p>
-<p><strong>③Set</strong><br>1.添加：sadd [set名] [value] [value] ……。如果有重复的，集合默认把重复的忽略进行添加不重复的值。<br>2.查询：SMEMBERS [set名]。查看一个值是否在集合中：SMEMBERS [set名] [value]。查看元素个数SCARD [set名]。<br>3.删除集合中的值：SREM [set] [value]。<br>4.随机出值个数：SRANDMEMBER [set] [个数]。可用来抽奖。随机出栈：spop [set]。<br>5.移动一个值到另外的集合中：SMOVE [set源] [set目标] [所移动值]。<br>6.差集：SDIFF [set1集合] [set2集合] ……。所得出的数字是以set1集合为目标，不在后面任何一个集合中的数字出现。<br>7.交集：SINTER [set1集合] [set2集合] ……。所得出的数字是在这些集合中都有的数字。<br>8.并集：SUNION [set1集合] [set2集合] ……。所得出的数字是在这些全部数字但是不重复。</p>
-<p><strong>④Hash（KV模式不变，但是V又是一个键值对）</strong><br>1.添加hash：hset [hash-key] [value-key] [value]。表示前面是添加符号，value-key表示的是value的key名字，最后面才是真正的value。<br>2.批量添加hash：hmset [hash-key] [value-key1][value1] [value-key2][value2] ……。所添加的就是一key为名的hash。批量获得hash：hmget [hash-key] [value-key1] [value-key2] 就可获得他们的value。第二种批量获得是：HGETALL [hash-key] 。会批量的得到前面是key后面的value的hash。<br>3.删除hash中某个value-key的value：hdel [hash-key] [value-key]。<br>4.获得hash的长度：hlen [hash-key]。<br>5.检测value-key是否存在hash中：HEXITS [hash-key] [value-key]。返回1为存在，返回0位不存在。<br>6.获取hash中每个keys的值：HKEYS [hash-key]。获取hash中每个value的值：HVALUES [hash-key]<br>7.使hash中数字key的value增减：HINCRBY [hash-key] [value-key] [所增长数字]。如果是浮点就是：HINCRBYFLOAT [hash-key] [value-key] [所增长数字]。<br>8.带判断存在的填充进入hash：HSETNX [hash-key] [value-key] [value]。</p>
-<p><strong>⑤Zset有序集合（相当于在set集合基础之上加一个score值）</strong><br>1.添加有序集合：zadd [zset-key] [score1] [value1] [score2] [value2] ……。意思为后面的每个score和value是绑定到一起的是一个value。<br>2.序列输出：ZRANGE [zset-key] [0始标] [-1终标]。带有分数的序列输出：ZRANGE [zset-key] [始标] [终标] withscores。<br>3.输出范围的序列：ZRANGEBYSCORE [zset-key] [始分] [终分]。不包含命令：ZRANGEBYSCORE [zset-key] （[始分] （[终分]。在范围前加一个“（”表示不包含这个数。从范围序列中再进行筛选：ZRANGEBYSCORE [zset-key] [始分] [终分] limit [始标] [所取个数]。<br>4.删除某个值：ZREM [zset-key] [value]。把分数和value是一起删除的。<br>5.统计个数：ZCARD [zset-key]：分数和value是一体的，所以只有value的个数。<br>6.统计范围scores的个数：ZCOUNT [zset-key] [始分] [终分]。<br>7.顺序统计排名（以0开始）：ZRANK [zset-key] [value]。根据值输出对应分数：ZSCORE [zset-key] [value]。<br>8.逆序统计排名：ZREVRANK [zset-key] [value]。逆序获得名次。逆序统计名次输出：ZREVRANGE [zset-key] [0始标] [-1终标]。</p>
-<h1 id="三、Redis如何持久化"><a href="#三、Redis如何持久化" class="headerlink" title="三、Redis如何持久化"></a>三、Redis如何持久化</h1><p>1.RDB、AOF。<br>2.RDB、AOF在指定的时间间隔内将内存中的数据集快照写入磁盘，<br>也就是行话讲的Snapshot快照，它恢复时是将快照文件直接读到内存里。Redis会单独创建（ fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失。Fork的作用是赋值一个与当前进程一样的进程。新进程的所有数据（变量、环境变量、程序计数器等）数值都和原进程一致，但是是一个全新的进程，并作为原进程的子进程。<img src="https://img-blog.csdnimg.cn/20210129110414469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDQ5Mzcx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3.在redis.conf配置文件中，系统会默默的给您生成三个策略，把dump.rdb保存到你的磁盘当中，这就是实现的持久化。<br>4.redis数据库中，运维会帮您把dump.rdb进行远程备份。当您使用FLUSHALL的时候清空了数据库在使用SHUTDOWN的时候他就将已经清空了的数据库保存下来了。所以这样下次就不能自动加载dump.rdb进行自动回复，需要下载dump.rdb进行恢复。简单来说：每次使用SHUTDOWN也会保存一次dump.rdb但是没有意义。如果有一个重要的数据需要保存，所以马上备份就是直接使用save命令，全部阻塞只管保存。bgsave是异步请求，一边保存一边接受新的增删。<br>5.RDB是非常紧凑文件，在保存文件父进程fork出子进程工作全由子进程做，所以RDB持久化方式可以最大化redis的性能。与AOF相比，恢复大的数据集时，RDB更快。缺点：丢失数据风险大，fork过程耗时间不能及时响应。<br>6.AOF：Append Only File：是在redis.conf配置文件append中默认关闭，我们将它开启之后它就会每次记录写入的操作。<br>7.AOF和RDB能够同时存在的，Redis启动时先读取AOF，如果AOF出现问题那么Redis启动被拒绝。如何解决？使用redis-check-aof自动帮你删除掉不符合它语法逻辑的，截断后面的。<br>8.重写原理，Redis会记录上次重写时的AOF大小，默认配置是当AOF大小是上次rewrite后大小的已被且文件大于64M时触发。但是现在至少的3GB起步了。<br>9.AOF文件是一个只进行追加的日志文件，Redis可以在AOF文件体积变得过大时，自动后台进行重写。AOF文件有序保存了对数据库写入操作，以Redis协议的格式保存，因此AOF文件的内容非常让人容易读懂。缺点：对于RDB来说AOF文件要大很多，根据fsync策略，AOF速度慢于RDB。<br>10.最终的性能建议：RDB作为后备策略，主要使用AOF来进行数据持久化。</p>
-<h1 id="四、事务"><a href="#四、事务" class="headerlink" title="四、事务"></a>四、事务</h1><p>1.开启事务：MULTI。通常返回OK，之后进行的每个命令返回的都是QUEUED，最后使用EXEC就会返回一个队列为前面所执行的每一个结果输出。放弃事务不提交：DISCARD。<br>2.全体连坐：中间有一个出错了的话（注意是在加入队列的时候就报错(error)，相当于Java的编译时报错，这样的出错叫做全体连坐），事务提交不上去，所以就没有这一条事务，对应原子性。<br>3.冤头债主：中间有一个是出错了（但是他出错在加入队列的时候是能够加进去的，返回QUEUED而不是报错信息）这样最后提交事务EXEC那么错误的那条报错，其它的是能够提交上去的。<br>4.表锁：使用的时候整表锁住，一致性最高，并发性极差。行锁：加锁力度小一点，一致性一般，并发性较好。<br>5.悲观锁：相当于表锁，把整张表都锁住，每次使用都上锁，知道下一个拿到锁之后才能进行修改。乐观锁：相当于GitHub的Push推送，需要将最新版本号Pull下来之后在进行修改后在Push，这样在保证并发性的同时并保持一致性，策略：提交的版本必须大于记录当前版本才能执行更新。<br>6.Watch监控（类似于乐观锁）：假设一个信用卡时间，我这次使用了几块钱，下次就要换几块钱。使用balance和debt进行验证，初始为100和0。我们开始使用watch监控到balance之后，如果balance没有在其他线程进行修改那么它开启事务MULTI之后再进行decrby balance 20，incrby debt 20。最终提交exec那么它会出结果为80和20。  但是，如果在watch监控balance之后，另外一个线程去改变了balance的量之后，我们再进行之前的事务操作，事务就会失败。<br>7.UNwatch取消监控：第六条Watch监控失效之后，你所监控的key被修改了，那么需要使用UNwatch取消监控。之后在使用watch监控最新的版本，来进行开启事务MULTI，进行提交EXEC事务。这样就会成功。<br>8.一旦执行了EXEC或UNwatch之前被监控的所有key都被结算了。所以要重新监控。<br>9.了解redis有消息发布订阅。订阅：SUBSCRIBE [key1] [key2] [key3]……。另一个线程发布：PUBLISH [key名] [消息]。模糊订阅：PSUBSCRIBE [key]*，另一个线程发布：PUBLISH [key只要包含前一个key中的] [消息]。都会被接收到。</p>
-<h1 id="五、主从复制"><a href="#五、主从复制" class="headerlink" title="五、主从复制"></a>五、主从复制</h1><p>1.Master用来写，Slave用来读。复制三个redis.conf，分别在redis后面加上端口号6379/80/81，之后进行配置他们的pidfile以及端口号和日志文件输出和dump+端口号。<br>2.分别使用三个配置文件开启端口号79 80 81的数据库，之后在使用info replication可以查看当前端口数据库是主还是从。之后从数据库使用SLAVEOF [ip地址] [端口号]来进行跟随主。并且在跟随主之前的数据都会被拷贝过来。<br>3.只有主机才能写，从机器只能读权限，所以他们写不了东西上去。<br>4.如果主机倒了，那么从机还是从机，不能变为主机，使用info replication还是从机。主机修复了之后从机依然跟随主机，不会发生任何改变，依然能够查询到主机添加的数据。<br>5.如果从机倒了，再进行端口打开连接，info replication那么他就从从机身份变成了主机身份，但是他是另外的一个主机身份，并不能查到之前主机数据库中的数据。除非写进了配置文件，不然都要重新连接主机。<br>6.一个主机可以有多个从机，但是一个从机只能有一个主机，从机可以跟随另外的一个从机，那么另外的中间从机它又是主机又是从机，但是它本身是不能写的所以这就形成了一个类似的链表结构。<br>7.中途变更转向：会清除之前的数据，重新读取新的主机的数据。<br>8.反客为主：SLAVEOF on noe。可以将主机已经下线的从机又变为新的主机。<br>9.哨兵模式：反客为主自动版。配置哨兵：sentinel monitor host6379 127.0.0.1 6379 1意思是代表监视6379的主机，如果SHUTDOWN了就后面跟随的从机器，谁的票数大于1就是谁是新主机。开启哨兵：redis-sentinel [sentinel.conf路径]。现在主机倒了，另外的从机会进行投票选出新的主机，而且不影响运行。但是如果倒掉的主机又重新连接上了，哨兵会将主机安排跟随新上位的从机。</p>
-<h1 id="六、IDEA中如何使用Jedis"><a href="#六、IDEA中如何使用Jedis" class="headerlink" title="六、IDEA中如何使用Jedis"></a>六、IDEA中如何使用Jedis</h1><p>1.在IDEA中常用命令使用方法，先New一个Jedis(“ip地址”,”端口号”);之后方法基本上都是与命令行是差不多的。<br>2.IDEA中开启事务：jedis.multi();提交事务：jedis.exec();开始监控：jedis.watch(‘keys名’);<br>3.模拟网络阻塞时被监控目标被修改情况：在watch之后使用一个线程睡眠，与此同时在linux界面上去修改这个被监控的值，这样事务不会被提交。<br>4.测试主从复制，new Jedis两个不同的端口号。之后从机.slaveof(“IP地址”，端口号)，主机set值之后从机可以get到。</p>
+                <h1 id="1、Eureka基础知识"><a href="#1、Eureka基础知识" class="headerlink" title="1、Eureka基础知识"></a>1、Eureka基础知识</h1><h2 id="1-1、什么是服务治理？"><a href="#1-1、什么是服务治理？" class="headerlink" title="1.1、什么是服务治理？"></a>1.1、什么是服务治理？</h2><p>Spring Cloud 封装了 Netflix 公司开发的 Eureka 模块来实现服务治理。在传统的rpc远程调用框架中，管理每个服务与服务之间依赖关系比较复杂，管理比较复杂，所以需要使用服务治理，管理服务于服务之间依赖关系，可以实现服务调用、负载均衡、容错等，实现服务发现与注册。</p>
+<h2 id="1-2、什么是服务注册？"><a href="#1-2、什么是服务注册？" class="headerlink" title="1.2、什么是服务注册？"></a>1.2、什么是服务注册？</h2><p>Eureka采用了CS的设计架构，Eureka Server 作为服务注册功能的服务器，它是服务注册中心。而系统中的其他微服务，使用 Eureka的客户端连接到 Eureka Server并维持心跳连接。这样系统的维护人员就可以通过 Eureka Server 来监控系统中各个微服务是否正常运行。<br>在服务注册与发现中，有一个注册中心。当服务器启动的时候，会把当前自己服务器的信息 比如 服务地址通讯地址等以别名方式注册到注册中心上。另一方（消费者|服务提供者），以该别名的方式去注册中心上获取到实际的服务通讯地址，然后再实现本地RPC调用RPC远程调用框架核心设计思想：在于注册中心，因为使用注册中心管理每个服务与服务之间的一个依赖关系(服务治理概念)。在任何rpc远程框架中，都会有一个注册中心(存放服务地址相关信息(接口地址))<br><img src="https://img-blog.csdnimg.cn/2021041015073216.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDQ5Mzcx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"></p>
+<h2 id="1-3、Eureka两大组件"><a href="#1-3、Eureka两大组件" class="headerlink" title="1.3、Eureka两大组件"></a>1.3、Eureka两大组件</h2><p>Eureka包含两个组件：Eureka Server和Eureka Client<br>Eureka Server提供服务注册服务<br>各个微服务节点通过配置启动后，会在EurekaServer中进行注册，这样EurekaServer中的服务注册表中将会存储所有可用服务节点的信息，服务节点的信息可以在界面中直观看到。</p>
+<p>EurekaClient通过注册中心进行访问<br>是一个Java客户端，用于简化Eureka Server的交互，客户端同时也具备一个内置的、使用轮询(round-robin)负载算法的负载均衡器。在应用启动后，将会向Eureka Server发送心跳(默认周期为30秒)。如果Eureka Server在多个心跳周期内没有接收到某个节点的心跳，EurekaServer将会从服务注册表中把这个服务节点移除（默认90秒）</p>
+<h1 id="2、单机Eureka构建步骤"><a href="#2、单机Eureka构建步骤" class="headerlink" title="2、单机Eureka构建步骤"></a>2、单机Eureka构建步骤</h1><h2 id="2-1、添加Eureka依赖"><a href="#2-1、添加Eureka依赖" class="headerlink" title="2.1、添加Eureka依赖"></a>2.1、添加Eureka依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--eureka-server--&gt;</span><br><span class="line">      &lt;dependency&gt;</span><br><span class="line">          &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">          &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-server&lt;&#x2F;artifactId&gt;</span><br><span class="line">      &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2、yaml配置文件"><a href="#2-2、yaml配置文件" class="headerlink" title="2.2、yaml配置文件"></a>2.2、yaml配置文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: eureka7001.com #eureka服务端的实例名称</span><br><span class="line">  client:</span><br><span class="line">    #false表示不向注册中心注册自己。</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务</span><br><span class="line">    fetch-registry: false</span><br><span class="line">    service-url:</span><br><span class="line">      #设置与Eureka Server交互的地址查询服务和注册服务都需要依赖这个地址。</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;eureka7001.com:7001&#x2F;eureka&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3、主启动类"><a href="#2-3、主启动类" class="headerlink" title="2.3、主启动类"></a>2.3、主启动类</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaServer<span class="comment">//一定要添加上这个注解</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">EurekaMain7001</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="title">main</span>(<span class="params"><span class="built_in">String</span>[] args</span>)</span> &#123;</span><br><span class="line">        SpringApplication.run(EurekaMain7001.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-4、访问"><a href="#2-4、访问" class="headerlink" title="2.4、访问"></a>2.4、访问</h2><p><a target="_blank" rel="noopener" href="http://localhost:7001/">http://localhost:7001/</a><br>因为没有服务类加入进来所以列表是空的，接下来介绍如何将服务类加入进来。</p>
+<h1 id="3、服务添加进Eureka步骤"><a href="#3、服务添加进Eureka步骤" class="headerlink" title="3、服务添加进Eureka步骤"></a>3、服务添加进Eureka步骤</h1><h2 id="3-1、引入依赖"><a href="#3-1、引入依赖" class="headerlink" title="3.1、引入依赖"></a>3.1、引入依赖</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--eureka client--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-netflix-eureka-client&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="3-2、配置yaml文件"><a href="#3-2、配置yaml文件" class="headerlink" title="3.2、配置yaml文件"></a>3.2、配置yaml文件</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-provider-payment	#服务名称</span><br><span class="line"></span><br><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: true	#表示是否将自己注册进EurekaServer默认为true。</span><br><span class="line">    fetch-registry: true	#是否从EurekaServer抓取已有的注册信息，默认为true。单节点无所谓，集群必须设置为true才能配合ribbon使用负载均衡</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;eureka7001.com:7001&#x2F;eureka	#所加入的服务发现IP地址</span><br></pre></td></tr></table></figure>
+<h2 id="3-3、主启动类"><a href="#3-3、主启动类" class="headerlink" title="3.3、主启动类"></a>3.3、主启动类</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaClient<span class="comment">//应用Eureka客户端</span></span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">PaymentHystrixMain8001</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="title">main</span>(<span class="params"><span class="built_in">String</span>[] args</span>)</span> &#123;</span><br><span class="line">        SpringApplication.run(PaymentHystrixMain8001.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="3-4、Eureka查看该服务"><a href="#3-4、Eureka查看该服务" class="headerlink" title="3.4、Eureka查看该服务"></a>3.4、Eureka查看该服务</h2><p><a target="_blank" rel="noopener" href="http://localhost:7001/">http://localhost:7001/</a><br>可以在Instances currently registered with Eureka看到该服务已经注册进入。</p>
+<h1 id="4、Eureka集群搭建"><a href="#4、Eureka集群搭建" class="headerlink" title="4、Eureka集群搭建"></a>4、Eureka集群搭建</h1><h2 id="4-1、复制Eureka的单机模块"><a href="#4-1、复制Eureka的单机模块" class="headerlink" title="4.1、复制Eureka的单机模块"></a>4.1、复制Eureka的单机模块</h2><p>修改yml中的端口号：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 7002</span><br></pre></td></tr></table></figure>
+<h2 id="4-2、主类与单机一致，只需要将配置改为相互守望即可。"><a href="#4-2、主类与单机一致，只需要将配置改为相互守望即可。" class="headerlink" title="4.2、主类与单机一致，只需要将配置改为相互守望即可。"></a>4.2、主类与单机一致，只需要将配置改为相互守望即可。</h2><p><strong>7002端口的Eureka配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: eureka7002.com #eureka服务端的实例名称</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    #false表示不向注册中心注册自己。</span><br><span class="line">    fetch-registry: false</span><br><span class="line">    #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;eureka7001.com:7001&#x2F;eureka&#x2F;</span><br></pre></td></tr></table></figure>
+<p><strong>7001端口的Eureka配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  instance:</span><br><span class="line">    hostname: eureka7001.com #eureka服务端的实例名称</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    #false表示不向注册中心注册自己。</span><br><span class="line">    fetch-registry: false</span><br><span class="line">    #false表示自己端就是注册中心，我的职责就是维护服务实例，并不需要去检索服务</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;eureka7002.com:2001&#x2F;eureka&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="4-3、将客户端同时注册进入Eureka集群"><a href="#4-3、将客户端同时注册进入Eureka集群" class="headerlink" title="4.3、将客户端同时注册进入Eureka集群"></a>4.3、将客户端同时注册进入Eureka集群</h2><p>yml配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: true</span><br><span class="line">    fetchRegistry: true</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;eureka7001.com:7001&#x2F;eureka,http:&#x2F;&#x2F;eureka7002.com:7002&#x2F;eureka</span><br></pre></td></tr></table></figure>
+<p>Eureka集群可以实现高可用。</p>
+<h1 id="1、OpenFeign概述"><a href="#1、OpenFeign概述" class="headerlink" title="1、OpenFeign概述"></a>1、OpenFeign概述</h1><h2 id="1-1、OpenFeign是什么？"><a href="#1-1、OpenFeign是什么？" class="headerlink" title="1.1、OpenFeign是什么？"></a>1.1、OpenFeign是什么？</h2><p>Feign是一个声明式WebService客户端。使用Feign能让编写Web Service客户端更加简单。<br>它的使用方法是定义一个服务接口然后在上面添加注解。Feign也支持可拔插式的编码器和解码器。Spring Cloud对Feign进行了封装，使其支持了Spring MVC标准注解和HttpMessageConverters。Feign可以与Eureka和Ribbon组合使用以支持负载均衡<br>GitHub地址：<a target="_blank" rel="noopener" href="https://github.com/spring-cloud/spring-cloud-openfeign">https://github.com/spring-cloud/spring-cloud-openfeign</a></p>
+<h2 id="1-2、Feign能干吗？"><a href="#1-2、Feign能干吗？" class="headerlink" title="1.2、Feign能干吗？"></a>1.2、Feign能干吗？</h2><p>Feign旨在使编写Java Http客户端变得更容易。<br>前面在使用Ribbon+RestTemplate时，利用RestTemplate对http请求的封装处理，形成了一套模版化的调用方法。但是在实际开发中，由于对服务依赖的调用可能不止一处，往往一个接口会被多处调用，所以通常都会针对每个微服务自行封装一些客户端类来包装这些依赖服务的调用。所以，Feign在此基础上做了进一步封装，由他来帮助我们定义和实现依赖服务接口的定义。在Feign的实现下，我们只需创建一个接口并使用注解的方式来配置它(以前是Dao接口上面标注Mapper注解,现在是一个微服务接口上面标注一个Feign注解即可)，即可完成对服务提供方的接口绑定，简化了使用Spring cloud Ribbon时，自动封装服务调用客户端的开发量。</p>
+<p>Feign集成了Ribbon<br>利用Ribbon维护了Payment的服务列表信息，并且通过轮询实现了客户端的负载均衡。而与Ribbon不同的是，通过feign只需要定义服务绑定接口且以声明式的方法，优雅而简单的实现了服务调用</p>
+<h1 id="2、OpenFeign使用"><a href="#2、OpenFeign使用" class="headerlink" title="2、OpenFeign使用"></a>2、OpenFeign使用</h1><h2 id="2-1、Pom文件，前提是Eureka已搭建成功"><a href="#2-1、Pom文件，前提是Eureka已搭建成功" class="headerlink" title="2.1、Pom文件，前提是Eureka已搭建成功"></a>2.1、Pom文件，前提是Eureka已搭建成功</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--openfeign--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-openfeign&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p>yml配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">eureka:</span><br><span class="line">  client:</span><br><span class="line">    register-with-eureka: false</span><br><span class="line">    service-url:</span><br><span class="line">      defaultZone: http:&#x2F;&#x2F;eureka7001.com:7001&#x2F;eureka&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="2-2、主启动类"><a href="#2-2、主启动类" class="headerlink" title="2.2、主启动类"></a>2.2、主启动类</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableFeignClients</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">OrderFeignMain80</span> </span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> <span class="function"><span class="title">main</span>(<span class="params"><span class="built_in">String</span>[] args</span>)</span> &#123;</span><br><span class="line">        SpringApplication.run(OrderFeignMain80.class, args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="2-3、客户端的Service层接口"><a href="#2-3、客户端的Service层接口" class="headerlink" title="2.3、客户端的Service层接口"></a>2.3、客户端的Service层接口</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">@FeignClient(value = <span class="string">&quot;CLOUD-PAYMENT-SERVICE&quot;</span>)<span class="comment">//服务名称</span></span><br><span class="line">public interface PaymentFeignService &#123;</span><br><span class="line">    @GetMapping(<span class="string">&quot;/payment/get/&#123;id&#125;&quot;</span>)</span><br><span class="line">    public CommonResult getPaymentById(@PathVariable(<span class="string">&quot;id&quot;</span>) Long id);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>需要与<strong>服务端</strong>的Controller进行对应</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@GetMapping(<span class="string">&quot;/payment/get/&#123;id&#125;&quot;</span>)</span><br><span class="line">    public CommonResult <span class="function"><span class="title">getPaymentById</span>(<span class="params">@PathVariable(<span class="string">&quot;id&quot;</span>) Long id</span>)</span> &#123;</span><br><span class="line">    	<span class="comment">//业务逻辑省略</span></span><br><span class="line">    	<span class="keyword">return</span> <span class="literal">null</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<h1 id="学习地址"><a href="#学习地址" class="headerlink" title="学习地址"></a>学习地址</h1><p>来源：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18E411x7eT">https://www.bilibili.com/video/BV18E411x7eT</a></p>
 
                 
             </div>
@@ -428,7 +440,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/29/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2021/03/29/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
+                    <a href="http://example.com/2021/04/30/Eureka%E4%B8%8EOpenFeign/">http://example.com/2021/04/30/Eureka%E4%B8%8EOpenFeign/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -639,13 +651,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/29/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                <a href="/2021/04/30/SpringCloud%20Alibaba%20Sentinel%E7%86%94%E6%96%AD%E4%B8%8E%E9%99%90%E6%B5%81/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Spring学习笔记">
+                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="SpringCloud Alibaba Sentinel">
                         
-                        <span class="card-title">Spring学习笔记</span>
+                        <span class="card-title">SpringCloud Alibaba Sentinel</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -656,7 +668,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-30
                         </span>
                         <span class="publish-author">
                             
@@ -676,13 +688,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/29/MyBatisPlus/">
+                <a href="/2021/04/30/Gateway%E7%BD%91%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="MybatisPlus">
+                        <img src="/medias/featureimages/4.jpg" class="responsive-img" alt="Gateway网关学习笔记">
                         
-                        <span class="card-title">MybatisPlus</span>
+                        <span class="card-title">Gateway网关学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -693,7 +705,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-30
                             </span>
                         <span class="publish-author">
                             

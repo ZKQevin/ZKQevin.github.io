@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Redis学习笔记, Kevin&#39;s Blog">
+    <meta name="keywords" content="Gateway网关学习笔记, Kevin&#39;s Blog">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Redis学习笔记 | Kevin&#39;s Blog</title>
+    <title>Gateway网关学习笔记 | Kevin&#39;s Blog</title>
     <link rel="icon" type="image/png" href="/icon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -222,12 +222,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/9.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/4.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Redis学习笔记</h1>
+                    <h1 class="description center-align post-title">Gateway网关学习笔记</h1>
                 </div>
             </div>
         </div>
@@ -355,14 +355,14 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-30
                 </div>
                 
 
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2021-03-29
+                    2021-04-30
                 </div>
                 
 
@@ -381,27 +381,32 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>中文官网地址：<a target="_blank" rel="noopener" href="http://www.redis.cn/">http://www.redis.cn</a><br>中文API文档地址：<a target="_blank" rel="noopener" href="http://redisdoc.com/">http://redisdoc.com</a></p>
-<h1 id="一、部署Redis"><a href="#一、部署Redis" class="headerlink" title="一、部署Redis"></a>一、部署Redis</h1><p>1.安装</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install wget </span><br><span class="line">[root@localhost ~]# wget http:&#x2F;&#x2F;download.redis.io&#x2F;releases&#x2F;redis-6.0.6.tar.gz</span><br><span class="line">[root@localhost ~]# tar xzf redis-6.0.6.tar.gz</span><br><span class="line">[root@localhost ~]# cd redis-redis-6.0.6</span><br><span class="line">[root@localhost ~]# make   #提示报错选装GCC：yum install gcc-c++</span><br></pre></td></tr></table></figure>
-<p>2.开启进程守护</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost redis-6.0.6]# vi  redis.conf</span><br><span class="line"></span><br><span class="line"># Note that Redis will write a pid file in &#x2F;var&#x2F;run&#x2F;redis.pid when daemonized.</span><br><span class="line">daemonize yes</span><br></pre></td></tr></table></figure>
-<p>3.开启服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# cd &#x2F;usr&#x2F;local&#x2F;bin&#x2F;</span><br><span class="line">[root@localhost bin]# redis-server  &#x2F;redis-6.0.6&#x2F;redis.conf</span><br><span class="line">[root@localhost bin]# redis-cli  -p 6379</span><br><span class="line">127.0.0.1:6379&gt; ping</span><br><span class="line">PONG</span><br></pre></td></tr></table></figure>
-<p>4.关闭服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">127.0.0.1:6379&gt; shutdown</span><br><span class="line">not connected&gt; exit</span><br></pre></td></tr></table></figure>
-<p>5.安装目录文件声明<br>redis-benchmark:性能测试工具，测试性能<br>redis-check-aof：修复有问题的AOF文件，<br>redis-check-dump：修复有问题的dump.rdb文件<br>redis-cli：客户端，操作入口<br>redis-sentinel：redis集群使用<br>redis-server：Redis服务器启动命令</p>
-<p>参考于：<a target="_blank" rel="noopener" href="https://blog.csdn.net/yangliuhbhd/article/details/81317689">https://blog.csdn.net/yangliuhbhd/article/details/81317689</a></p>
-<h1 id="二、Redis常用命令"><a href="#二、Redis常用命令" class="headerlink" title="二、Redis常用命令"></a>二、Redis常用命令</h1><p><strong>Redis五大数据类型String（字符串）、Hash（哈希类似Java的Map）、List（列表）、Set（集合）、Zset（有序集合）</strong></p>
-<p><strong>①String</strong><br>1.添加：set [key] [value]。带生命周期添加：setex [key] [秒数] [value]。带判断存在添加：setnx [key] [value]。<br>2.查询：keys [*]<br>3.删除：DEL [key]。使用FLUSHDB：清除当前数据库，FLUSHALL：清除所有数据库<br>4.移动：MOVE [key] [所移数据库名]<br>5.设置过期时间：EXPIRE [key名] [秒数]，查看过期时间ttl [key名]，如果为-1表示永不过期，-2表示已过期。其它时间为倒数秒数，已经过期的数据就被删除了，不会再keys *中查询到。<br>6.只增加数字不增字符串：INCR/DECR [key名]，增/减一。同理INCRBY/DECRBY [key名] [数字]。<br>7.定点查看字符串：GETRANGE [key名] [前下标] [后下标] ，截取下标添加字符串命令：SETRANGE [key名] [始标] [内容]。<br>8.追加：APPEND [key名] [追加数据]，查询长度：STRLEN [key名]<br>9.批量新增：mset [key] [value] [key] [value]……。批量获取：mget [key] [key] [key]。带判断的新增有序集合（如果数据库已存在都不会成功）：msetnx [key] [value] [key] [value]……。</p>
-<p><strong>②List</strong><br>1.列表LIST相关添加：分为LPUSH和RPUSH，LPUSH [key] [v1] [v2] [v3]……，分为左右进入，如果你是使用左边进的话LPUSH就是逆着出LRANGE，如果你是RPUSH就是顺着出来LRANGE。可以这样理解，当使用LRANGE时是从左到右进行输出，使用LPUSH是从中间往左边插入，使用RPUSH是从中间往右边输入。只有RPUSH是怎么进怎么出。<br>2.创建LIST列表，命令：lpush [key名] [数组]，查看：LRANGE [LISTkey名] 0 -1，查看类型type [key名]。<br>3.列表出栈命令：lpop [key]和rpop [key]，一个是从左边出栈，一个是从右边出栈。<br>4.通过下标获取list中的值，LINDEX [list] [下标值]，是从左到右数的。下标从0开始。获取长度：LLEN [list]。<br>5.删除N个value：LREM [list] [所删除的个数] [所删除的数字]，如果删除的个数大于本身存在的个数，他就会把存在的全部删了，不会报错。<br>6.截取出其中一段赋值给本身：LTRIM [list] [始标] [末标]。<br>7.右出栈左进栈：RPOPLPUSH [list01] [list02] 。就是把后面的list01的右边最后一个添加到list02的左边第一个。<br>8.通过下标更改某一个值：lset [key] [index] [value]。在某个地方前/后插值：LINSERT [key] [before/after] [本身存在value1] [新值value2]。</p>
-<p><strong>③Set</strong><br>1.添加：sadd [set名] [value] [value] ……。如果有重复的，集合默认把重复的忽略进行添加不重复的值。<br>2.查询：SMEMBERS [set名]。查看一个值是否在集合中：SMEMBERS [set名] [value]。查看元素个数SCARD [set名]。<br>3.删除集合中的值：SREM [set] [value]。<br>4.随机出值个数：SRANDMEMBER [set] [个数]。可用来抽奖。随机出栈：spop [set]。<br>5.移动一个值到另外的集合中：SMOVE [set源] [set目标] [所移动值]。<br>6.差集：SDIFF [set1集合] [set2集合] ……。所得出的数字是以set1集合为目标，不在后面任何一个集合中的数字出现。<br>7.交集：SINTER [set1集合] [set2集合] ……。所得出的数字是在这些集合中都有的数字。<br>8.并集：SUNION [set1集合] [set2集合] ……。所得出的数字是在这些全部数字但是不重复。</p>
-<p><strong>④Hash（KV模式不变，但是V又是一个键值对）</strong><br>1.添加hash：hset [hash-key] [value-key] [value]。表示前面是添加符号，value-key表示的是value的key名字，最后面才是真正的value。<br>2.批量添加hash：hmset [hash-key] [value-key1][value1] [value-key2][value2] ……。所添加的就是一key为名的hash。批量获得hash：hmget [hash-key] [value-key1] [value-key2] 就可获得他们的value。第二种批量获得是：HGETALL [hash-key] 。会批量的得到前面是key后面的value的hash。<br>3.删除hash中某个value-key的value：hdel [hash-key] [value-key]。<br>4.获得hash的长度：hlen [hash-key]。<br>5.检测value-key是否存在hash中：HEXITS [hash-key] [value-key]。返回1为存在，返回0位不存在。<br>6.获取hash中每个keys的值：HKEYS [hash-key]。获取hash中每个value的值：HVALUES [hash-key]<br>7.使hash中数字key的value增减：HINCRBY [hash-key] [value-key] [所增长数字]。如果是浮点就是：HINCRBYFLOAT [hash-key] [value-key] [所增长数字]。<br>8.带判断存在的填充进入hash：HSETNX [hash-key] [value-key] [value]。</p>
-<p><strong>⑤Zset有序集合（相当于在set集合基础之上加一个score值）</strong><br>1.添加有序集合：zadd [zset-key] [score1] [value1] [score2] [value2] ……。意思为后面的每个score和value是绑定到一起的是一个value。<br>2.序列输出：ZRANGE [zset-key] [0始标] [-1终标]。带有分数的序列输出：ZRANGE [zset-key] [始标] [终标] withscores。<br>3.输出范围的序列：ZRANGEBYSCORE [zset-key] [始分] [终分]。不包含命令：ZRANGEBYSCORE [zset-key] （[始分] （[终分]。在范围前加一个“（”表示不包含这个数。从范围序列中再进行筛选：ZRANGEBYSCORE [zset-key] [始分] [终分] limit [始标] [所取个数]。<br>4.删除某个值：ZREM [zset-key] [value]。把分数和value是一起删除的。<br>5.统计个数：ZCARD [zset-key]：分数和value是一体的，所以只有value的个数。<br>6.统计范围scores的个数：ZCOUNT [zset-key] [始分] [终分]。<br>7.顺序统计排名（以0开始）：ZRANK [zset-key] [value]。根据值输出对应分数：ZSCORE [zset-key] [value]。<br>8.逆序统计排名：ZREVRANK [zset-key] [value]。逆序获得名次。逆序统计名次输出：ZREVRANGE [zset-key] [0始标] [-1终标]。</p>
-<h1 id="三、Redis如何持久化"><a href="#三、Redis如何持久化" class="headerlink" title="三、Redis如何持久化"></a>三、Redis如何持久化</h1><p>1.RDB、AOF。<br>2.RDB、AOF在指定的时间间隔内将内存中的数据集快照写入磁盘，<br>也就是行话讲的Snapshot快照，它恢复时是将快照文件直接读到内存里。Redis会单独创建（ fork）一个子进程来进行持久化，会先将数据写入到一个临时文件中，待持久化过程都结束了，再用这个临时文件替换上次持久化好的文件。整个过程中，主进程是不进行任何IO操作的，这就确保了极高的性能。如果需要进行大规模数据的恢复，且对于数据恢复的完整性不是非常敏感，那RDB方式要比AOF方式更加的高效。RDB的缺点是最后一次持久化后的数据可能丢失。Fork的作用是赋值一个与当前进程一样的进程。新进程的所有数据（变量、环境变量、程序计数器等）数值都和原进程一致，但是是一个全新的进程，并作为原进程的子进程。<img src="https://img-blog.csdnimg.cn/20210129110414469.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDQ5Mzcx,size_16,color_FFFFFF,t_70" alt="在这里插入图片描述"><br>3.在redis.conf配置文件中，系统会默默的给您生成三个策略，把dump.rdb保存到你的磁盘当中，这就是实现的持久化。<br>4.redis数据库中，运维会帮您把dump.rdb进行远程备份。当您使用FLUSHALL的时候清空了数据库在使用SHUTDOWN的时候他就将已经清空了的数据库保存下来了。所以这样下次就不能自动加载dump.rdb进行自动回复，需要下载dump.rdb进行恢复。简单来说：每次使用SHUTDOWN也会保存一次dump.rdb但是没有意义。如果有一个重要的数据需要保存，所以马上备份就是直接使用save命令，全部阻塞只管保存。bgsave是异步请求，一边保存一边接受新的增删。<br>5.RDB是非常紧凑文件，在保存文件父进程fork出子进程工作全由子进程做，所以RDB持久化方式可以最大化redis的性能。与AOF相比，恢复大的数据集时，RDB更快。缺点：丢失数据风险大，fork过程耗时间不能及时响应。<br>6.AOF：Append Only File：是在redis.conf配置文件append中默认关闭，我们将它开启之后它就会每次记录写入的操作。<br>7.AOF和RDB能够同时存在的，Redis启动时先读取AOF，如果AOF出现问题那么Redis启动被拒绝。如何解决？使用redis-check-aof自动帮你删除掉不符合它语法逻辑的，截断后面的。<br>8.重写原理，Redis会记录上次重写时的AOF大小，默认配置是当AOF大小是上次rewrite后大小的已被且文件大于64M时触发。但是现在至少的3GB起步了。<br>9.AOF文件是一个只进行追加的日志文件，Redis可以在AOF文件体积变得过大时，自动后台进行重写。AOF文件有序保存了对数据库写入操作，以Redis协议的格式保存，因此AOF文件的内容非常让人容易读懂。缺点：对于RDB来说AOF文件要大很多，根据fsync策略，AOF速度慢于RDB。<br>10.最终的性能建议：RDB作为后备策略，主要使用AOF来进行数据持久化。</p>
-<h1 id="四、事务"><a href="#四、事务" class="headerlink" title="四、事务"></a>四、事务</h1><p>1.开启事务：MULTI。通常返回OK，之后进行的每个命令返回的都是QUEUED，最后使用EXEC就会返回一个队列为前面所执行的每一个结果输出。放弃事务不提交：DISCARD。<br>2.全体连坐：中间有一个出错了的话（注意是在加入队列的时候就报错(error)，相当于Java的编译时报错，这样的出错叫做全体连坐），事务提交不上去，所以就没有这一条事务，对应原子性。<br>3.冤头债主：中间有一个是出错了（但是他出错在加入队列的时候是能够加进去的，返回QUEUED而不是报错信息）这样最后提交事务EXEC那么错误的那条报错，其它的是能够提交上去的。<br>4.表锁：使用的时候整表锁住，一致性最高，并发性极差。行锁：加锁力度小一点，一致性一般，并发性较好。<br>5.悲观锁：相当于表锁，把整张表都锁住，每次使用都上锁，知道下一个拿到锁之后才能进行修改。乐观锁：相当于GitHub的Push推送，需要将最新版本号Pull下来之后在进行修改后在Push，这样在保证并发性的同时并保持一致性，策略：提交的版本必须大于记录当前版本才能执行更新。<br>6.Watch监控（类似于乐观锁）：假设一个信用卡时间，我这次使用了几块钱，下次就要换几块钱。使用balance和debt进行验证，初始为100和0。我们开始使用watch监控到balance之后，如果balance没有在其他线程进行修改那么它开启事务MULTI之后再进行decrby balance 20，incrby debt 20。最终提交exec那么它会出结果为80和20。  但是，如果在watch监控balance之后，另外一个线程去改变了balance的量之后，我们再进行之前的事务操作，事务就会失败。<br>7.UNwatch取消监控：第六条Watch监控失效之后，你所监控的key被修改了，那么需要使用UNwatch取消监控。之后在使用watch监控最新的版本，来进行开启事务MULTI，进行提交EXEC事务。这样就会成功。<br>8.一旦执行了EXEC或UNwatch之前被监控的所有key都被结算了。所以要重新监控。<br>9.了解redis有消息发布订阅。订阅：SUBSCRIBE [key1] [key2] [key3]……。另一个线程发布：PUBLISH [key名] [消息]。模糊订阅：PSUBSCRIBE [key]*，另一个线程发布：PUBLISH [key只要包含前一个key中的] [消息]。都会被接收到。</p>
-<h1 id="五、主从复制"><a href="#五、主从复制" class="headerlink" title="五、主从复制"></a>五、主从复制</h1><p>1.Master用来写，Slave用来读。复制三个redis.conf，分别在redis后面加上端口号6379/80/81，之后进行配置他们的pidfile以及端口号和日志文件输出和dump+端口号。<br>2.分别使用三个配置文件开启端口号79 80 81的数据库，之后在使用info replication可以查看当前端口数据库是主还是从。之后从数据库使用SLAVEOF [ip地址] [端口号]来进行跟随主。并且在跟随主之前的数据都会被拷贝过来。<br>3.只有主机才能写，从机器只能读权限，所以他们写不了东西上去。<br>4.如果主机倒了，那么从机还是从机，不能变为主机，使用info replication还是从机。主机修复了之后从机依然跟随主机，不会发生任何改变，依然能够查询到主机添加的数据。<br>5.如果从机倒了，再进行端口打开连接，info replication那么他就从从机身份变成了主机身份，但是他是另外的一个主机身份，并不能查到之前主机数据库中的数据。除非写进了配置文件，不然都要重新连接主机。<br>6.一个主机可以有多个从机，但是一个从机只能有一个主机，从机可以跟随另外的一个从机，那么另外的中间从机它又是主机又是从机，但是它本身是不能写的所以这就形成了一个类似的链表结构。<br>7.中途变更转向：会清除之前的数据，重新读取新的主机的数据。<br>8.反客为主：SLAVEOF on noe。可以将主机已经下线的从机又变为新的主机。<br>9.哨兵模式：反客为主自动版。配置哨兵：sentinel monitor host6379 127.0.0.1 6379 1意思是代表监视6379的主机，如果SHUTDOWN了就后面跟随的从机器，谁的票数大于1就是谁是新主机。开启哨兵：redis-sentinel [sentinel.conf路径]。现在主机倒了，另外的从机会进行投票选出新的主机，而且不影响运行。但是如果倒掉的主机又重新连接上了，哨兵会将主机安排跟随新上位的从机。</p>
-<h1 id="六、IDEA中如何使用Jedis"><a href="#六、IDEA中如何使用Jedis" class="headerlink" title="六、IDEA中如何使用Jedis"></a>六、IDEA中如何使用Jedis</h1><p>1.在IDEA中常用命令使用方法，先New一个Jedis(“ip地址”,”端口号”);之后方法基本上都是与命令行是差不多的。<br>2.IDEA中开启事务：jedis.multi();提交事务：jedis.exec();开始监控：jedis.watch(‘keys名’);<br>3.模拟网络阻塞时被监控目标被修改情况：在watch之后使用一个线程睡眠，与此同时在linux界面上去修改这个被监控的值，这样事务不会被提交。<br>4.测试主从复制，new Jedis两个不同的端口号。之后从机.slaveof(“IP地址”，端口号)，主机set值之后从机可以get到。</p>
+                <h1 id="1、概述"><a href="#1、概述" class="headerlink" title="1、概述"></a>1、概述</h1><h2 id="1-1、是什么"><a href="#1-1、是什么" class="headerlink" title="1.1、是什么"></a>1.1、是什么</h2><p>Gateway是在Spring生态系统之上构建的API网关服务，基于Spring 5，Spring Boot 2和 Project Reactor等技术。<br>Gateway旨在提供一种简单而有效的方式来对API进行路由，以及提供一些强大的过滤器功能， 例如：熔断、限流、重试等。<br>SpringCloud Gateway 使用的Webflux中的reactor-netty响应式编程组件，底层使用了Netty通讯框架。<br>官网：<a target="_blank" rel="noopener" href="https://spring.io/projects/spring-cloud-gateway">https://spring.io/projects/spring-cloud-gateway</a></p>
+<h2 id="1-2、做什么"><a href="#1-2、做什么" class="headerlink" title="1.2、做什么"></a>1.2、做什么</h2><p>反向代理、鉴权、流量控制、熔断、日志监控等等，相当于Servlet的过滤器。以下是<strong>架构图</strong>：<br><img src="https://img-blog.csdnimg.cn/20210412134605948.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3FxXzQxMDQ5Mzcx,size_16,color_FFFFFF,t_70" alt="架构图"></p>
+<h2 id="1-3、三大核心概念"><a href="#1-3、三大核心概念" class="headerlink" title="1.3、三大核心概念"></a>1.3、三大核心概念</h2><h3 id="1-3-1、Route-路由"><a href="#1-3-1、Route-路由" class="headerlink" title="1.3.1、Route(路由)"></a>1.3.1、Route(路由)</h3><p>路由是构建网关的基本模块，它由ID，目标URI，一系列的断言和过滤器组成，如果断言为true则匹配该路由</p>
+<h3 id="1-3-2、Predicate-断言"><a href="#1-3-2、Predicate-断言" class="headerlink" title="1.3.2、Predicate(断言)"></a>1.3.2、Predicate(断言)</h3><p>参考的是Java8的java.util.function.Predicate<br>开发人员可以匹配HTTP请求中的所有内容(例如请求头或请求参数)，如果请求与断言相匹配则进行路由。</p>
+<h3 id="1-3-3、Filter-过滤"><a href="#1-3-3、Filter-过滤" class="headerlink" title="1.3.3、Filter(过滤)"></a>1.3.3、Filter(过滤)</h3><p>指的是Spring框架中GatewayFilter的实例，使用过滤器，可以在请求被路由前或者之后对请求进行修改。</p>
+<h1 id="2、Gateway配置过程"><a href="#2、Gateway配置过程" class="headerlink" title="2、Gateway配置过程"></a>2、Gateway配置过程</h1><h2 id="2-1、入门配置"><a href="#2-1、入门配置" class="headerlink" title="2.1、入门配置"></a>2.1、入门配置</h2><h3 id="2-1-1、通过配置文件进行配置"><a href="#2-1-1、通过配置文件进行配置" class="headerlink" title="2.1.1、通过配置文件进行配置"></a>2.1.1、通过配置文件进行配置</h3><p><strong>pom依赖</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--gateway--&gt;</span><br><span class="line">        &lt;dependency&gt;</span><br><span class="line">            &lt;groupId&gt;org.springframework.cloud&lt;&#x2F;groupId&gt;</span><br><span class="line">            &lt;artifactId&gt;spring-cloud-starter-gateway&lt;&#x2F;artifactId&gt;</span><br><span class="line">        &lt;&#x2F;dependency&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>主启动类</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">@EnableEurekaClient</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">GateWayMain9527</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    public <span class="keyword">static</span> <span class="keyword">void</span> main(<span class="built_in">String</span>[] args)</span><br><span class="line">    &#123;</span><br><span class="line">        SpringApplication.run(GateWayMain9527.class,args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>yml配置</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 9527</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-gateway</span><br><span class="line">  cloud:</span><br><span class="line">    gateway:</span><br><span class="line">      routes:</span><br><span class="line">        - id: payment_routh #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名</span><br><span class="line">          uri: http:&#x2F;&#x2F;localhost:8001          #匹配后提供服务的路由地址</span><br><span class="line">          predicates:</span><br><span class="line">            - Path&#x3D;&#x2F;payment&#x2F;get&#x2F;**         # 断言，路径相匹配的进行路由</span><br><span class="line"></span><br><span class="line">        - id: payment_routh2 #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名</span><br><span class="line">          uri: http:&#x2F;&#x2F;localhost:8001          #匹配后提供服务的路由地址</span><br><span class="line">          predicates:</span><br><span class="line">            - Path&#x3D;&#x2F;payment&#x2F;lb&#x2F;**         # 断言，路径相匹配的进行路由</span><br></pre></td></tr></table></figure>
+<p><strong>主要注意三点，一个是配置的url地址，另一个是断言匹配路径，还有就是注册进入服务发现Eureka中心。先启动8001端口，再启动9527端口变可以通过9527端口的/payment/get/id访问到8001端口，从而实现路由的功能。</strong></p>
+<h3 id="2-1-1、通过注入RouteLocator的Bean配置"><a href="#2-1-1、通过注入RouteLocator的Bean配置" class="headerlink" title="2.1.1、通过注入RouteLocator的Bean配置"></a>2.1.1、通过注入RouteLocator的Bean配置</h3><p>加入依赖与主启动类与上面相同，不同的是添加一个Config配置类进入容器.<br>需求分析，通过9527端口的/guonei访问到百度新闻的国内新闻：<a target="_blank" rel="noopener" href="http://news.baidu.com/guonei%E3%80%82">http://news.baidu.com/guonei。</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">public <span class="class"><span class="keyword">class</span> <span class="title">GateWayConfig</span> </span>&#123;</span><br><span class="line">    @Bean</span><br><span class="line">    public RouteLocator <span class="function"><span class="title">customRouteLocator</span>(<span class="params">RouteLocatorBuilder routeLocatorBuilder</span>)</span> &#123;</span><br><span class="line">        RouteLocatorBuilder.Builder routes = routeLocatorBuilder.routes();</span><br><span class="line">        routes.route(<span class="string">&quot;path_route_kevin&quot;</span>,</span><br><span class="line">                r -&gt; r.path(<span class="string">&quot;/guonei&quot;</span>)</span><br><span class="line">                        .uri(<span class="string">&quot;http://news.baidu.com/guonei&quot;</span>)).build();</span><br><span class="line">        <span class="keyword">return</span> routes.build();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>容器中放入一个RouteLocator类，生成一个路由，建立一个路径为/guonei的映射到uri为<a target="_blank" rel="noopener" href="http://news.baidu.com/guonei%EF%BC%8C%E5%AE%9E%E7%8E%B0%E8%AE%BF%E9%97%AE%E7%99%BE%E5%BA%A6%E5%9B%BD%E5%86%85%E6%96%B0%E9%97%BB%E7%9A%84%E7%9B%AE%E7%9A%84%E3%80%82">http://news.baidu.com/guonei，实现访问百度国内新闻的目的。</a></p>
+<h2 id="2-2、通过微服务名称实现动态路由"><a href="#2-2、通过微服务名称实现动态路由" class="headerlink" title="2.2、通过微服务名称实现动态路由"></a>2.2、通过微服务名称实现动态路由</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">server:</span><br><span class="line">  port: 9527</span><br><span class="line"></span><br><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-gateway</span><br><span class="line">  cloud:</span><br><span class="line">    gateway:</span><br><span class="line">      discovery:</span><br><span class="line">        locator:</span><br><span class="line">          enabled: true #开启从注册中心动态创建路由的功能，利用微服务名进行路由</span><br><span class="line">      routes:</span><br><span class="line">        - id: payment_routh #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名</span><br><span class="line">          # uri: http:&#x2F;&#x2F;localhost:8001          #匹配后提供服务的路由地址</span><br><span class="line">          uri: lb:&#x2F;&#x2F;cloud-payment-service #匹配后提供服务的路由地址</span><br><span class="line">          predicates:</span><br><span class="line">            - Path&#x3D;&#x2F;payment&#x2F;get&#x2F;**         # 断言，路径相匹配的进行路由</span><br><span class="line"></span><br><span class="line">        - id: payment_routh2 #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名</span><br><span class="line">          # uri: http:&#x2F;&#x2F;localhost:8001          #匹配后提供服务的路由地址</span><br><span class="line">          uri: lb:&#x2F;&#x2F;cloud-payment-service #匹配后提供服务的路由地址</span><br><span class="line">          predicates:</span><br><span class="line">            - Path&#x3D;&#x2F;payment&#x2F;lb&#x2F;**         # 断言，路径相匹配的进行路由</span><br></pre></td></tr></table></figure>
+<p>l<strong>b://serviceName是spring cloud gateway在微服务中自动为我们创建的负载均衡uri</strong></p>
+<h2 id="2-3、Predicate断言的使用"><a href="#2-3、Predicate断言的使用" class="headerlink" title="2.3、Predicate断言的使用"></a>2.3、Predicate断言的使用</h2><h3 id="2-3-1、是什么？"><a href="#2-3-1、是什么？" class="headerlink" title="2.3.1、是什么？"></a>2.3.1、是什么？</h3><p>Spring Cloud Gateway将路由匹配作为Spring WebFlux HandlerMapping基础架构的一部分。<br>Spring Cloud Gateway包括许多内置的Route Predicate工厂。所有这些Predicate都与HTTP请求的不同属性匹配。多个Route Predicate工厂可以进行组合。</p>
+<p>Spring Cloud Gateway 创建 Route 对象时， 使用 RoutePredicateFactory 创建 Predicate 对象，Predicate 对象可以赋值给 Route。 Spring Cloud Gateway 包含许多内置的Route Predicate Factories。</p>
+<p>所有这些谓词都匹配HTTP请求的不同属性。多种谓词工厂可以组合，并通过逻辑and。<br>官网链接：<a target="_blank" rel="noopener" href="https://docs.spring.io/spring-cloud-gateway/docs/3.0.3-SNAPSHOT/reference/html/#gateway-request-predicates-factories">https://docs.spring.io/spring-cloud-gateway/docs/3.0.3-SNAPSHOT/reference/html/#gateway-request-predicates-factories</a></p>
+<h2 id="2-4、Filter过滤器的使用"><a href="#2-4、Filter过滤器的使用" class="headerlink" title="2.4、Filter过滤器的使用"></a>2.4、Filter过滤器的使用</h2><h3 id="2-4-1、常用的GatewayFilter"><a href="#2-4-1、常用的GatewayFilter" class="headerlink" title="2.4.1、常用的GatewayFilter"></a>2.4.1、常用的GatewayFilter</h3><p>yml配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: cloud-gateway</span><br><span class="line">  cloud:</span><br><span class="line">    gateway:</span><br><span class="line">     filters:</span><br><span class="line">            - AddRequestParameter&#x3D;X-Request-Id,1024 #过滤器工厂会在匹配的请求头加上一对请求头，名称为X-Request-Id值为1024</span><br></pre></td></tr></table></figure>
+<h3 id="2-4-2、自定义过滤器"><a href="#2-4-2、自定义过滤器" class="headerlink" title="2.4.2、自定义过滤器"></a>2.4.2、自定义过滤器</h3><p>自定义全局GlobalFilter，只需要继承两个接口即可：GlobalFilter, Ordered。并加入到容器中去。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">@Slf4j</span><br><span class="line">@Component</span><br><span class="line">    public <span class="class"><span class="keyword">class</span> <span class="title">MyLogGateWayFilter</span> <span class="title">implements</span> <span class="title">GlobalFilter</span>, <span class="title">Ordered</span> </span>&#123;</span><br><span class="line">    @Override</span><br><span class="line">    public Mono&lt;Void&gt; <span class="function"><span class="title">filter</span>(<span class="params">ServerWebExchange exchange, GatewayFilterChain chain</span>)</span> &#123;</span><br><span class="line">        log.info(<span class="string">&quot;***************   come in MyLogGateWayFilter：&quot;</span>+<span class="keyword">new</span> <span class="built_in">Date</span>()+<span class="string">&quot;***************&quot;</span>);</span><br><span class="line">        <span class="built_in">String</span> uname = exchange.getRequest().getQueryParams().getFirst(<span class="string">&quot;uname&quot;</span>);</span><br><span class="line">        <span class="keyword">if</span> (uname == <span class="literal">null</span>) &#123;</span><br><span class="line">            log.info(<span class="string">&quot;用户名为非法用户┭┮﹏┭┮&quot;</span>);</span><br><span class="line">            exchange.getResponse().setStatusCode(HttpStatus.NOT_ACCEPTABLE);</span><br><span class="line">            <span class="keyword">return</span> exchange.getResponse().setComplete();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> chain.filter(exchange);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public int <span class="function"><span class="title">getOrder</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>必须带有参数才能够访问：<a target="_blank" rel="noopener" href="http://localhost:9527/payment/lb?uname=z3%EF%BC%8C%E5%A6%82%E6%9E%9C%E4%B8%8D%E5%B8%A6%E5%B0%B1%E8%AE%BF%E9%97%AE%E4%B8%8D%E4%BA%86%E3%80%82">http://localhost:9527/payment/lb?uname=z3，如果不带就访问不了。</a></p>
+<h1 id="3、学习地址"><a href="#3、学习地址" class="headerlink" title="3、学习地址"></a>3、学习地址</h1><p>哔哩哔哩尚硅谷来源：<a target="_blank" rel="noopener" href="https://www.bilibili.com/video/BV18E411x7eT">https://www.bilibili.com/video/BV18E411x7eT</a></p>
 
                 
             </div>
@@ -428,7 +433,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/03/29/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2021/03/29/Redis%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
+                    <a href="http://example.com/2021/04/30/Gateway%E7%BD%91%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">http://example.com/2021/04/30/Gateway%E7%BD%91%E5%85%B3%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -639,13 +644,13 @@
             <div class="article-badge left-badge text-color">
                 <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
             <div class="card">
-                <a href="/2021/03/29/Spring%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+                <a href="/2021/04/30/Eureka%E4%B8%8EOpenFeign/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/13.jpg" class="responsive-img" alt="Spring学习笔记">
+                        <img src="/medias/featureimages/6.jpg" class="responsive-img" alt="Eureka与OpenFeign">
                         
-                        <span class="card-title">Spring学习笔记</span>
+                        <span class="card-title">Eureka与OpenFeign</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -656,7 +661,7 @@
                     </div>
                     <div class="publish-info">
                         <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                            <i class="far fa-clock fa-fw icon-date"></i>2021-04-30
                         </span>
                         <span class="publish-author">
                             
@@ -676,13 +681,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/03/29/MyBatisPlus/">
+                <a href="/2021/04/30/SpringMVC%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/21.jpg" class="responsive-img" alt="MybatisPlus">
+                        <img src="/medias/featureimages/11.jpg" class="responsive-img" alt="SpringMVC学习笔记">
                         
-                        <span class="card-title">MybatisPlus</span>
+                        <span class="card-title">SpringMVC学习笔记</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -693,7 +698,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-03-29
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-30
                             </span>
                         <span class="publish-author">
                             
